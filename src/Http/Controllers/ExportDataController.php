@@ -92,21 +92,25 @@ class ExportDataController extends Controller
     }
 
     public function get_device_groups(Request $request)
-    {
-        $devices_groups_data = array();  
-        foreach ($_POST['device_groups'] as $device_group) {
-            $device_group_object = DeviceGroup::where('id', $id)->orderBy("ifName")->get(['id','ifName']);
-            $groups_list = [];
-            foreach ($device_group_object as $value) {
-                $groups_list[$value['id']] = $value['ifName'];
-            }
-            $devices_groups_data[$device_id] = $groups_list;
-        }
+{
+    // Assuming 'device_groups' is an array of device group IDs from the request
+    $deviceGroupIds = $request->input('device_groups', []);
 
-        return view('export-data::groups', [
-            'device_group' => DeviceGroup::whereIn('id', $_POST['device_group'])->get(),
-            'devices_groups_data' => $devices_groups_data,
-        ]);
+    // Fetch device groups based on provided IDs or get all if none are provided
+    $deviceGroups = DeviceGroup::whereIn('id', $deviceGroupIds)->get(['id', 'name']);
+
+    // Preparing data for the view
+    $devicesGroupsData = [];
+    foreach ($deviceGroups as $deviceGroup) {
+        // Assuming you want to use 'name' instead of 'ifName'
+        $devicesGroupsData[$deviceGroup->id] = $deviceGroup->name;
     }
+
+    return view('export-data::groups', [
+        'device_groups' => $deviceGroups, // Passing the whole collection to the view
+        'devices_groups_data' => $devicesGroupsData, // Passing the simplified ID => Name array
+    ]);
+}
+
     
 }
