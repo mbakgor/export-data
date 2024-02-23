@@ -23,9 +23,9 @@
                             <div class="tab-content">
 
                                 <div id="form_get_groups" class="tab-pane fade">
-                                    <form id="export_form" onsubmit="event.preventDefault(); requestPorts(this);">
+                                    <form id="form_get_groups" onsubmit="event.preventDefault(); getDeviceGroups(this);">
                                         @csrf
-                                        <input type="hidden" id="action" name="action" value="export_data" />
+                                        <input type="hidden" id="action" name="action" value="get_groups" />
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="panel panel-default">

@@ -2,26 +2,26 @@
     <thead>
         <tr>
             <th class="col-xs-3">
-                <span>Port</span>
+                <span>Group</span>
             </th>
             <th class="col-xs-9">
-                <span>Vlan IDs</span>
+                <span>Group IDs</span>
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($result as $port => $port_vlans)
-            @if (count($port_vlans) > 0)
+        @foreach ($result as $device_group => $device_group_name)
+            @if (count($device_group_name) > 0)
                 <tr class="danger">
             @else
                 <tr class="success">
             @endif
             <td class="col-xs-6">
-                <b>{{ $port }}</b>
+                <b>{{ $device_group }}</b>
             </td>
             <td class="col-xs-6">
-                @foreach ($port_vlans as $vlan)
-                    {{ $vlan }}
+                @foreach ($device_group_name as $name)
+                    {{ $name }}
                 @endforeach
             </td>
         </tr>
