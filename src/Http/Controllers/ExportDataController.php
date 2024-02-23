@@ -6,7 +6,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Device;
-use App\Models\DeviceGroup
+use App\Models\DeviceGroup;
 use App\Models\Vlan;
 use App\Models\Port;
 use App\Models\PortVlan;
