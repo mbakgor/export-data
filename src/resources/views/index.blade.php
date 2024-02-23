@@ -22,7 +22,7 @@
                         <div class="panel-body">
                             <div class="tab-content">
 
-                                <div id="exportDiv" class="tab-pane fade">
+                                <div id="form_get_groups" class="tab-pane fade">
                                     <form id="export_form" onsubmit="event.preventDefault(); requestPorts(this);">
                                         @csrf
                                         <input type="hidden" id="action" name="action" value="export_data" />
@@ -33,7 +33,7 @@
                                                         <h3 class="panel-title">Select a Device Group</h3>
                                                     </div>
                                                     <div class="panel-body text-center">
-                                                        <select onchange="event.preventDefault(); getDeviceGroups(export_form);" multiple name="device_group[]" class="js-example-basic-multiple" style="width: 100%;">
+                                                        <select onchange="event.preventDefault(); getDeviceGroups(form_get_groups);" multiple name="device_group[]" class="js-example-basic-multiple" style="width: 100%;">
                                                             @foreach ($device_group as $group)
                                                                 <option value="{{ $group->id }}">{{ $group->name }}</option>
                                                             @endforeach
