@@ -1,0 +1,30 @@
+{
+    "name": "mbakgor/export-data",
+    "description": "LibreNMS plugin that helps you to export devices data to an excel file.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Muhammed Bakgor",
+            "email": "bakgormuhammed@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "mbakgor\\ExportData\\": "src"
+        }
+    },
+    "autoload-dev": {
+      "psr-4": {
+        "mbakgor\\ExportData\\": "src"
+      }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                 "mbakgor\\ExportData\\Providers\\ExportDataServiceProvider"
+            ]
+        }
+    }
+}
