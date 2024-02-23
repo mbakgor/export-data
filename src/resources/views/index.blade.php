@@ -34,7 +34,7 @@
                                                     </div>
                                                     <div class="panel-body text-center">
                                                         <select onchange="event.preventDefault(); getDeviceGroups(export_form);" multiple name="device_group[]" class="js-example-basic-multiple" style="width: 100%;">
-                                                            @foreach ($groups as $group)
+                                                            @foreach ($device_group as $group)
                                                                 <option value="{{ $group->id }}">{{ $group->name }}</option>
                                                             @endforeach
                                                         </select>
