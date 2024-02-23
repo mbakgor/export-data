@@ -17,11 +17,11 @@ function requestDevices(data) {
 }
 
 
-function getDevices(data) {
+function getDeviceGroups(data) {
     var formData = new FormData(data);
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/plugins/export-data/get-devices");
+    xhr.open("POST", "/plugins/export-data/get-device-group");
     xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
 
     xhr.onload = function () {

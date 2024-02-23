@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Device;
+use App\Models\DeviceGroup
 use App\Models\Vlan;
 use App\Models\Port;
 use App\Models\PortVlan;
@@ -90,21 +91,22 @@ class ExportDataController extends Controller
         return $response;
     }
 
-    public function get_ports(Request $request)
+    public function get_device_groups(Request $request)
     {
-        $devices_port_data = array();  // Gather devices ports data from DB
-        foreach ($_POST['devices'] as $device_id) {
-            $device_ports_object = Port::where('device_id', $device_id)->orderBy("ifName")->get(['port_id','ifName']);
-            $ports_list = [];
-            foreach ($device_ports_object as $value) {
-                $ports_list[$value['port_id']] = $value['ifName'];
+        $devices_groups_data = array();  
+        foreach ($_POST['device_groups'] as $device_group) {
+            $device_group_object = DeviceGroup::where('id', $id)->orderBy("ifName")->get(['id','ifName']);
+            $groups_list = [];
+            foreach ($device_group_object as $value) {
+                $groups_list[$value['id']] = $value['ifName'];
             }
-            $devices_port_data[$device_id] = $ports_list;
+            $devices_groups_data[$device_id] = $groups_list;
         }
 
-        return view('export-data::ports', [
-            'devices' => Device::whereIn('device_id', $_POST['devices'])->get(),
-            'devices_port_data' => $devices_port_data,
+        return view('export-data::groups', [
+            'device_group' => DeviceGroup::whereIn('id', $_POST['device_group'])->get(),
+            'devices_groups_data' => $devices_groups_data,
         ]);
     }
+    
 }
