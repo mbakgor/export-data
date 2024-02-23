@@ -16,9 +16,11 @@ class ExportDataController extends Controller
     public function index()
     {
         $devices = Device::orderBy("hostname")->get();
+        $device_groups = DeviceGroup::all();
 
         return view('export-data::index', [
             'devices' => $devices,
+            'device_groups' => $device_groups,
         ]);
     }
 
