@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="col-xs-12">
 
-                    <h2>export-data</h2>
+                    <h2>Export Device Data</h2>
 
                     <div class="alert alert-warning">This Plugin helps you to export devices from a specific device group.</div>
 

@@ -27,7 +27,9 @@ class DevicesExport implements FromCollection, WithHeadings
                 return [
                     'Device Name' => $device->sysName,
                     'Device IP' => $device->ip,
-                    'Device Type' => $device->sysDescr, 
+                    'Device Type' => $device->sysDescr,
+                    'Version' => $device->version,
+                    'Serial Number' => $device->serial,
                 ];
             });
         }
