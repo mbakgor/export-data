@@ -26,7 +26,7 @@ class DevicesExport implements FromCollection, WithHeadings
             return $deviceGroup->devices->map(function ($device) {
                 return [
                     'Device Name' => $device->sysName,
-                    'Device IP' => $device->ip,
+                    'Device IP' => $device->hostname,
                     'Device Type' => $device->sysDescr,
                     'Version' => $device->version,
                     'Serial Number' => $device->serial,
