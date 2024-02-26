@@ -3,9 +3,11 @@
 namespace mbakgor\ExportData\Exports;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use App\Models\DeviceGroup;
+use Illuminate\Support\Collection;
 
-class DevicesExport implements FromCollection
+class DevicesExport implements FromCollection, WithHeadings
 {
     protected $deviceGroupId;
 
@@ -16,8 +18,26 @@ class DevicesExport implements FromCollection
 
     public function collection()
     {
-        $deviceGroup = DeviceGroup::find($this->deviceGroupId);
         
-        return $deviceGroup ? $deviceGroup->devices : collect([]);
+        $deviceGroup = DeviceGroup::with('devices')->find($this->deviceGroupId);
+
+        
+        if ($deviceGroup) {
+            return $deviceGroup->devices->map(function ($device) {
+                return [
+                    'Device Name' => $device->sysName,
+                    'Device IP' => $device->ip,
+                    'Device Type' => $device->sysDescr, 
+                ];
+            });
+        }
+
+        
+        return collect([]);
+    }
+
+    public function headings(): array
+    {
+        return ["Device Name", "Device IP", "Device Type"];
     }
 }
