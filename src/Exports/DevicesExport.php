@@ -40,6 +40,6 @@ class DevicesExport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ["Device Name", "Device IP", "Device Type"];
+        return ["Device Name", "Device IP", "Device Type", "Version", "Serial Number"];
     }
 }
