@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exports;
+namespace mbakgor\ExportData\Exports;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Models\DeviceGroup;

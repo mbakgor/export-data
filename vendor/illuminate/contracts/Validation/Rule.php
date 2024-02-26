@@ -2,6 +2,9 @@
 
 namespace Illuminate\Contracts\Validation;
 
+/**
+ * @deprecated see ValidationRule
+ */
 interface Rule
 {
     /**
@@ -16,7 +19,7 @@ interface Rule
     /**
      * Get the validation error message.
      *
-     * @return string
+     * @return string|array
      */
     public function message();
 }

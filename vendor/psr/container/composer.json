@@ -11,12 +11,20 @@
             "homepage": "https://www.php-fig.org/"
         }
     ],
+    "support": {
+        "source": "https://github.com/php-fig/container"
+    },
     "require": {
         "php": ">=7.4.0"
     },
     "autoload": {
         "psr-4": {
             "Psr\\Container\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
         }
     }
 }
