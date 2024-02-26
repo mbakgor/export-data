@@ -26,5 +26,13 @@
                  "mbakgor\\ExportData\\Providers\\ExportDataServiceProvider"
             ]
         }
+    },
+    "require": {
+        "maatwebsite/excel": "2.1.x-dev"
+    },
+    "config": {
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
     }
 }
