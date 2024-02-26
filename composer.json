@@ -28,7 +28,7 @@
         }
     },
     "require": {
-        "maatwebsite/excel": "2.1.x-dev"
+        "maatwebsite/excel": "^3.1"
     },
     "config": {
         "allow-plugins": {
