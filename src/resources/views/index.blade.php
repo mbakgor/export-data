@@ -18,50 +18,21 @@
                         </ul>
                     </div>
 
-                    <div class="panel with-nav-tabs panel-default">
-                        <div class="panel-body">
-                            <div class="tab-content">
+                    <form action="{{ route('export.devices') }}" method="POST">
+    @csrf
 
-                                <div id="form_get_groups" class="tab-pane fade">
-                                    <form id="form_get_groups" onsubmit="event.preventDefault(); getDeviceGroups(this);">
-                                        @csrf
-                                        <input type="hidden" id="action" name="action" value="get_groups" />
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
-                                                        <h3 class="panel-title">Select a Device Group</h3>
-                                                    </div>
-                                                    <div class="panel-body text-center">
-                                                        <select onchange="event.preventDefault(); getDeviceGroups(form_get_groups);" multiple name="device_group[]" class="js-example-basic-multiple" style="width: 100%;">
-                                                            @foreach ($device_groups as $group)
-                                                                <option value="{{ $group->id }}">{{ $group->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row" style="height: 100%;">
-                                            <div class="col-md-4">
-                                                <div class="panel panel-default">
-                                                    <div class="panel-heading">
-                                                        <h3 class="panel-title">Devices in that group ; </h3>
-                                                    </div>
-                                                    <div class="panel-body text-center" style="height: 42vh;">
-                                                        <select id="select_devices" multiple name="devices[]" class="form-control" style="height: 90%;">
-                                                        </select>
-                                                        <button type="submit" class="btn btn-success m-3" style='margin-top: 5px;' name="Submit">Export</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+    <div class="form-group">
+        <label for="device_group_id">Select Device Group:</label>
+        <select name="device_group_id" id="device_group_id" class="form-control">
+            @foreach ($device_groups as $group)
+                <option value="{{ $group->id }}">{{ $group->name }}</option>
+            @endforeach
+        </select>
+    </div>
 
-                            </div>
-                        </div>
-                     </div>
+    <button type="submit" class="btn btn-primary">Export Devices</button>
+</form>
+
 
                 </div>
 
@@ -69,7 +40,6 @@
 
              </div>
         </div>
-    </div>
 
 <script src="{{ asset('mbakgor/export-data/js/requests.js') }}"></script>
 <script type="text/javascript">
