@@ -18,7 +18,7 @@
                         </ul>
                     </div>
 
-                    <form action="{{ route('export.devices') }}" method="POST">
+                    <form action="{{ route('export-data.exportDevices') }}" method="POST">
     @csrf
 
     <div class="form-group">

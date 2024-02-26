@@ -4,6 +4,7 @@ namespace mbakgor\ExportData\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 use App\Models\Device;
 use App\Models\DeviceGroup;
