@@ -6,5 +6,5 @@ use App\Plugins\Hooks\MenuEntryHook;
 
 class MenuHook extends MenuEntryHook
 {
-    public string $view = 'export-data::menu.main';
+    public $view = 'export-data::menu.main';
 }
