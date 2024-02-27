@@ -27,7 +27,6 @@ class DevicesExport implements FromCollection, WithHeadings
 
                 $averageMempoolPerc = $device->mempools->avg('mempool_perc');
                 $averageStoragePerc = $device->storage->avg('storage_perc');
-                $averageProcessorPerc = $device->proc->avg('processor_perc_warn');
                 return [
                     'Device Name' => $device->sysName,
                     'Device IP' => $device->hostname,
@@ -35,8 +34,7 @@ class DevicesExport implements FromCollection, WithHeadings
                     'Version' => $device->version,
                     'Serial Number' => $device->serial,
                     'Mempool Percentage' => $averageMempoolPerc,
-                    'Storage Percentage' => $averageStoragePerc,
-                    'Processor Percentage' => $averageProcessorPerc,
+                    'Storage Percentage' => $averageStoragePerc
 
                     ];
             });
@@ -48,6 +46,6 @@ class DevicesExport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ["Device Name", "Device IP", "Device Type", "Version", "Serial Number", "Mempool Percentage", "Storage Percentage", "Processor Percentage"];
+        return ["Device Name", "Device IP", "Device Type", "Version", "Serial Number", "Mempool Percentage", "Storage Percentage"];
     }
 }

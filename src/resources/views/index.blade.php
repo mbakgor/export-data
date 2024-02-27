@@ -14,24 +14,71 @@
 
                     <div class="panel-heading">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="/plugins/export-data#devices" data-toggle="tab" aria-expanded="true">Export Data</a></li>
+                            <li class="active"><a href="/plugins/export-data#devices" data-toggle="tab" aria-expanded="true">Export General Data</a></li>
+                            <li><a href="/plugins/export-data#disks" data-toggle="tab">Export Disk Data</a></li>
                         </ul>
                     </div>
+                    <div class="panel with-nav-tabs panel-default">
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <!-- start -->
+                                <div id="devices" class="tab-pane fade in active">
+                                    <div class="row" style="height: 100%;">
+                                        <div class="col-md-4">
+                                            <div class="panel panel-default">
+                                              <div class="panel-heading">
+                                                   <h3 class="panel-title">Export General Data</h3>
+                                              </div>
+                                              <div class="panel-body text-center" style="height: 55vh;">
+                                              <form action="{{ route('export-data.exportDevices') }}" method="POST">
+                                                  @csrf
+                                                  <div class="form-group">
+                                                     <select name="device_group_id" id="device_group_id" class="form-control">
+                                                       @foreach ($device_groups as $group)
+                                                          <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                                       @endforeach
+                                                    </select>
+                                                  </div>
 
-                    <form action="{{ route('export-data.exportDevices') }}" method="POST">
-    @csrf
+                                    <button type="submit" class="btn btn-primary">Export Devices</button>
+                                            </form>             
+                                                </div>
+                                             </div>
+                                         </div>
+                                    </div>
+                                </div>
+                                <!-- end -->
+                                 <!-- start -->
+                                 <div id="disks" class="tab-pane fade in active">
+                                    <div class="row" style="height: 100%;">
+                                        <div class="col-md-4">
+                                            <div class="panel panel-default">
+                                              <div class="panel-heading">
+                                                   <h3 class="panel-title">Export Disk Data</h3>
+                                              </div>
+                                              <div class="panel-body text-center" style="height: 55vh;">
+                                              <form action="{{ route('export-data.exportDisks') }}" method="POST">
+                                                  @csrf
+                                                  <div class="form-group">
+                                                     <select name="device_group_id" id="device_group_id" class="form-control">
+                                                       @foreach ($device_groups as $group)
+                                                          <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                                       @endforeach
+                                                    </select>
+                                                  </div>
 
-    <div class="form-group">
-        <label for="device_group_id">Select Device Group:</label>
-        <select name="device_group_id" id="device_group_id" class="form-control">
-            @foreach ($device_groups as $group)
-                <option value="{{ $group->id }}">{{ $group->name }}</option>
-            @endforeach
-        </select>
-    </div>
+                                    <button type="submit" class="btn btn-primary">Export Disks</button>
+                                            </form>             
+                                                </div>
+                                             </div>
+                                         </div>
+                                    </div>
+                                </div>
+                                <!-- end -->
+                             </div>
+                    </div>
+                    </div>
 
-    <button type="submit" class="btn btn-primary">Export Devices</button>
-</form>
 
 
       <p>© 2024 Muhammed BAKGOR - ARYA-IT</p>
