@@ -3,7 +3,7 @@
         'name' => 'mbakgor/export-data',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'fa5046f9648e3f3b2e7e18ce0ac091ab225d7b03',
+        'reference' => '82326992d19e9267afdbd04edf3c8b1ca068096a',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -89,7 +89,7 @@
         'illuminate/support' => array(
             'pretty_version' => '10.x-dev',
             'version' => '10.9999999.9999999.9999999-dev',
-            'reference' => '3bffcf14df0551483c8001e522472a6f0849debc',
+            'reference' => '96d4512df39bee8cb60d50783f944a48242ea862',
             'type' => 'library',
             'install_path' => __DIR__ . '/../illuminate/support',
             'aliases' => array(),
@@ -134,7 +134,7 @@
         'mbakgor/export-data' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'fa5046f9648e3f3b2e7e18ce0ac091ab225d7b03',
+            'reference' => '82326992d19e9267afdbd04edf3c8b1ca068096a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

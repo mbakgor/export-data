@@ -511,12 +511,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "3bffcf14df0551483c8001e522472a6f0849debc"
+                "reference": "96d4512df39bee8cb60d50783f944a48242ea862"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/3bffcf14df0551483c8001e522472a6f0849debc",
-                "reference": "3bffcf14df0551483c8001e522472a6f0849debc",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/96d4512df39bee8cb60d50783f944a48242ea862",
+                "reference": "96d4512df39bee8cb60d50783f944a48242ea862",
                 "shasum": ""
             },
             "require": {
@@ -574,7 +574,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-02-25T14:45:37+00:00"
+            "time": "2024-02-26T22:20:06+00:00"
         },
         {
             "name": "maatwebsite/excel",
