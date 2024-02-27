@@ -49,7 +49,7 @@
                                 </div>
                                 <!-- end -->
                                  <!-- start -->
-                                 <div id="disks" class="tab-pane fade in active">
+                                 <div id="disks" class="tab-pane fade">
                                     <div class="row" style="height: 100%;">
                                         <div class="col-md-4">
                                             <div class="panel panel-default">
