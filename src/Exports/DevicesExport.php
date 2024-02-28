@@ -19,14 +19,15 @@ class DevicesExport implements FromCollection, WithHeadings
     public function collection()
     {
         
-        $deviceGroup = DeviceGroup::with('devices', 'devices.mempools')->find($this->deviceGroupId);
+        $deviceGroup = DeviceGroup::with('devices', 'devices.mempools', 'devices.processors')->find($this->deviceGroupId);
 
         
         if ($deviceGroup) {
             return $deviceGroup->devices->map(function ($device) {
 
-                $averageMempoolPerc = $device->mempools->avg('mempool_perc');
-                $averageStoragePerc = $device->storage->avg('storage_perc');
+                $averageMempoolPerc = number_format($device->mempools->avg('mempool_perc'), 2, ',', '');
+                $averageStoragePerc = number_format($device->storage->avg('storage_perc'), 2, ',', ''); 
+                $averateProcessorPerc = number_format($device->processors->avg('processor_usage'), 2, ',', '');
                 return [
                     'Device Name' => $device->sysName,
                     'Device IP' => $device->hostname,
@@ -34,7 +35,8 @@ class DevicesExport implements FromCollection, WithHeadings
                     'Version' => $device->version,
                     'Serial Number' => $device->serial,
                     'Mempool Percentage' => $averageMempoolPerc,
-                    'Storage Percentage' => $averageStoragePerc
+                    'Storage Percentage' => $averageStoragePerc,
+                    'Processor Percentage' => $averateProcessorPerc
 
                     ];
             });
@@ -46,6 +48,6 @@ class DevicesExport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ["Device Name", "Device IP", "Device Type", "Version", "Serial Number", "Mempool Percentage", "Storage Percentage"];
+        return ["Device Name", "Device IP", "Device Type", "Version", "Serial Number", "Mempool Percentage", "Storage Percentage", "Processor Percentage"];
     }
 }

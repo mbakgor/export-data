@@ -26,7 +26,11 @@ class DisksExport implements FromCollection, WithHeadings
             return $deviceGroup->devices->map(function ($device) {
 
                 $averageStoragePerc = $device->storage->avg('storage_perc');
-                $freeSpace = $device->storage->avg('free');
+                $freeSpacebits = $device->storage->avg('storage_free');
+
+                $unformattedStorageFree = $freeSpacebits / (8 * (2 ** 30));
+                
+                $averageStorageFree = number_format($unformattedStorageFree, 2, ',', '');
                 return [
                     'Device Name' => $device->sysName,
                     'Device IP' => $device->hostname,
@@ -34,7 +38,7 @@ class DisksExport implements FromCollection, WithHeadings
                     'Version' => $device->version,
                     'Serial Number' => $device->serial,
                     'Average Storage Percentage' => $averageStoragePerc,
-                    'Free Space' => $freeSpace
+                    'Free Space' => $averageStorageFree
 
                     ];
             });
@@ -46,6 +50,6 @@ class DisksExport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ["Device Name", "Device IP", "Device Type", "Version", "Serial Number", "Storage Percentage", "Free Space"];
+        return ["Device Name", "Device IP", "Device Type", "Version", "Serial Number", "Storage Percentage %", "Free Space (GB)"];
     }
 }
