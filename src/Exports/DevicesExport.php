@@ -20,7 +20,6 @@ class DevicesExport implements FromCollection, WithHeadings
     {
         
         $deviceGroup = DeviceGroup::with('devices', 'devices.mempools', 'devices.processors')->find($this->deviceGroupId);
-
         
         if ($deviceGroup) {
             return $deviceGroup->devices->map(function ($device) {
