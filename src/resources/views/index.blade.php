@@ -88,6 +88,7 @@
                                               <form action="{{ route('export-data.exportSpecificData') }}" method="POST">
                                                  @csrf
                                                  <div class="form-group">
+                                                 <label for="device_id">Select Devices:</label>
                                                         <select name="device_id[]" id="device_id" class="form-control" multiple>
                                                             @foreach ($devices as $device) 
                                                                   <option value="{{ $device->id }}">{{ $device->hostname }}</option> 
@@ -124,11 +125,12 @@
              </div>
         </div>
 
-<script src="{{ asset('mbakgor/export-data/js/requests.js') }}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#device_id').select2();
     $('#data_types').select2();
+    console.log($('#device_id').val());
 });
 </script>
+
 @endsection
