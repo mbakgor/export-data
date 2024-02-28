@@ -7,15 +7,15 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use App\Models\Port;
 
 class PortDataExport implements FromCollection, WithHeadings {
-    protected $deviceIds;
+    protected $deviceId;
 
-    public function __construct(array $deviceIds) {
-        $this->deviceIds = $deviceIds;
+    public function __construct($deviceId) {
+        $this->deviceId = $deviceId;
     }
 
     public function collection() {
 
-        $ports = Port::whereIn('device_id', $this->deviceIds)
+        $ports = Port::whereIn('device_id', $this->deviceId)
                         ->with(['device'])
                         ->get();
         

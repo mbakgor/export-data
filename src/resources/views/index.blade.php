@@ -91,13 +91,13 @@
                                                  <label for="device_id">Select Devices:</label>
                                                         <select name="device_id[]" id="device_id" class="form-control" multiple>
                                                             @foreach ($devices as $device) 
-                                                                  <option value="{{ $device->id }}">{{ $device->hostname }}</option> 
+                                                                  <option value="{{ $device->device_id }}">{{ $device->hostname }}</option> 
                                                              @endforeach
                                                         </select>
                                                  </div>
                                                  <div class="form-group">
                                                        <label for="data_types">Select Data Types:</label>
-                                                       <select name="data_types[]" id="data_types" class="form-control" multiple>
+                                                       <select name="data_type" id="data_type" class="form-control">
                                                        <option value="ports">Port Data</option>
                                                        <option value="disks">Disk Data</option>
                                                          </select>
@@ -129,7 +129,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('#device_id').select2();
-    $('#data_types').select2();
+    $('#data_type').select2();
     console.log($('#device_id').val());
 });
 </script>

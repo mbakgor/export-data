@@ -19,18 +19,20 @@ class SpecificExport {
     }
 
     public function downloadExcel() {
-        switch ($this->dataType) {
-            case 'ports':
-                $exportClass = new \mbakgor\ExportData\Exports\Models\PortDataExport($this->deviceIds);
-                break;
-            case 'disks':
-                $exportClass = new \mbakgor\ExportData\Exports\Models\DiskDataExport($this->deviceIds);
-                break;
-            
-            default:
-                throw new \Exception("Unsupported data type: " . $this->dataType);
+        foreach($this->deviceIds as $deviceId) {
+            switch ($this->dataType) {
+                case 'ports':
+                    $exportClass = new \mbakgor\ExportData\Exports\Models\PortDataExport($deviceId);
+                    break;
+                case 'disks':
+                    $exportClass = new \mbakgor\ExportData\Exports\Models\DiskDataExport($deviceId);
+                    break;
+                
+                default:
+                    throw new \Exception("Unsupported data type: " . $this->dataType);
+            }    
         }
-
+        
         return (new $exportClass)->download("{$this->dataType}_data_export.xlsx");
     }
 }
