@@ -11,6 +11,7 @@ use App\Models\DeviceGroup;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use mbakgor\ExportData\Exports\DevicesExport;
 use mbakgor\ExportData\Exports\DisksExport;
+use mbakgor\ExportData\Exports\SpecificExport;
 
 class ExportDataController extends Controller
 {
@@ -39,6 +40,15 @@ public function exportDisks(Request $request)
     $fileName = 'devices_disks_export.xlsx';
 
     return Excel::download(new DisksExport($deviceGroupId), $fileName);
+}
+
+public function exportSpecificData(Request $request) 
+{
+    $deviceIds = $request->input('device_id', []);
+    $dataType = $request->input('data_type'); 
+
+    $export = new SpecificExport($deviceIds, $dataType);
+    return $export->downloadExcel();
 }
 
 

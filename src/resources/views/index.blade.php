@@ -75,7 +75,38 @@
                                     </div>
                                 </div>
                                 <!-- end -->
+                                 <!-- start -->
+                                 <div id="specific" class="tab-pane fade">
+                                    <div class="row" style="height: 100%;">
+                                        <div class="col-md-4">
+                                            <div class="panel panel-default">
+                                              <div class="panel-heading">
+                                                   <h3 class="panel-title">Export Specific Device Data</h3>
+                                              </div>
+                                              <div class="panel-body text-center" style="height: 55vh;">
+                                              <form action="{{ route('export-data.exportSpecificData') }}" method="POST">
+                                                 @csrf
+                                                 <div class="form-group">
+                                                        <select name="device_id[]" id="device_id" class="form-control" multiple>
+                                                            @foreach ($devices as $device) 
+                                                                  <option value="{{ $device->id }}">{{ $device->hostname }}</option> 
+                                                             @endforeach
+                                                        </select>
+                                                 </div>
+                                                 <div class="form-group">
+                                                      <input type="checkbox" name="data_types[]" value="ports"> Port Data<br>
+                                                       <input type="checkbox" name="data_types[]" value="disks"> Disk Data
+                                                 </div>
+                                                <button type="submit" class="btn btn-primary">Export Data</button>
+                                                </form>
+                                                </div>
+                                             </div>
+                                         </div>
+                                    </div>
+                                </div>
+                                <!-- end -->
                              </div>
+                             
                     </div>
                     </div>
 
@@ -92,7 +123,7 @@
 <script src="{{ asset('mbakgor/export-data/js/requests.js') }}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('.js-example-basic-multiple').select2();
+    $('#device_id').select2();
 });
 </script>
 @endsection
