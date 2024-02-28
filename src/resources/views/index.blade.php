@@ -125,6 +125,7 @@
              </div>
         </div>
 
+<script src="{{ asset('mbakgor/export-data/js/requests.js') }}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#device_id').select2();
@@ -132,5 +133,4 @@ $(document).ready(function() {
     console.log($('#device_id').val());
 });
 </script>
-
 @endsection
