@@ -8,8 +8,9 @@ use Maatwebsite\Excel\Facades\Excel;
 
 use App\Models\Device;
 use App\Models\DeviceGroup;
-
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use mbakgor\ExportData\Exports\DevicesExport;
+use mbakgor\ExportData\Exports\DisksExport;
 
 class ExportDataController extends Controller
 {
@@ -30,6 +31,14 @@ class ExportDataController extends Controller
     $fileName = 'devices_export.xlsx';
 
     return Excel::download(new DevicesExport($deviceGroupId), $fileName);
+}
+
+public function exportDisks(Request $request) 
+{
+    $deviceGroupId = $request->input('device_group_id');
+    $fileName = 'devices_disks_export.xlsx';
+
+    return Excel::download(new DisksExport($deviceGroupId), $fileName);
 }
 
 
