@@ -16,6 +16,7 @@
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="/plugins/export-data#devices" data-toggle="tab" aria-expanded="true">Export General Data</a></li>
                             <li><a href="/plugins/export-data#disks" data-toggle="tab">Export Disk Data</a></li>
+                            <li><a href="/plugins/export-data#specific" data-toggle="tab">Export Specific Data</a></li>
                         </ul>
                     </div>
                     <div class="panel with-nav-tabs panel-default">
@@ -94,9 +95,12 @@
                                                         </select>
                                                  </div>
                                                  <div class="form-group">
-                                                      <input type="checkbox" name="data_types[]" value="ports"> Port Data<br>
-                                                       <input type="checkbox" name="data_types[]" value="disks"> Disk Data
-                                                 </div>
+                                                       <label for="data_types">Select Data Types:</label>
+                                                       <select name="data_types[]" id="data_types" class="form-control" multiple>
+                                                       <option value="ports">Port Data</option>
+                                                       <option value="disks">Disk Data</option>
+                                                         </select>
+                                                </div>
                                                 <button type="submit" class="btn btn-primary">Export Data</button>
                                                 </form>
                                                 </div>
@@ -124,6 +128,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('#device_id').select2();
+    $('#data_types').select2();
 });
 </script>
 @endsection

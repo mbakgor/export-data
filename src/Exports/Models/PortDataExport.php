@@ -1,6 +1,6 @@
 <?php
 
-namespace mbakgor\ExportData\Exports\DataTypes;
+namespace mbakgor\ExportData\Exports\Models;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;

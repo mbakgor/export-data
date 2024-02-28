@@ -5,6 +5,7 @@ namespace mbakgor\ExportData\Exports;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Illuminate\Support\Collection;
 
+
 class SpecificExport {
     use Exportable;
 
@@ -19,10 +20,10 @@ class SpecificExport {
     public function downloadExcel() {
         switch ($this->dataType) {
             case 'ports':
-                $exportClass = new DataTypes\PortDataExport($this->deviceIds);
+                $exportClass = new Models\PortDataExport($this->deviceIds);
                 break;
             case 'disks':
-                $exportClass = new DataTypes\DiskDataExport($this->deviceIds);
+                $exportClass = new Models\DiskDataExport($this->deviceIds);
                 break;
             
             default:
