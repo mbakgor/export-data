@@ -4,6 +4,7 @@ namespace mbakgor\ExportData\Exports\Models;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use App\Models\Storage; 
 use App\Models\Device;
 
 class DiskDataExport implements FromCollection, WithHeadings {
@@ -14,31 +15,25 @@ class DiskDataExport implements FromCollection, WithHeadings {
     }
 
     public function collection() {
-
-        $disks = Storage::whereIn('device_id', $this->deviceIds)
-        ->with(['device'])
-        ->get();
-
-
-        $data = $disks->map(function ($disk) {
-            return [
-                'Hostname' => $disk->device->hostname ?? 'N/A',
-                'sysName' => $disk->device->sysName ?? 'N/A',
-                'Port Name' => $disk->getLabel(),
-                'Port Status' => $disk->ifOperStatus ?? 'N/A',
-                  ];
-            });
-
-return $data;
+        return Storage::whereIn('device_id', $this->deviceIds)
+                      ->with(['device'])
+                      ->get()
+                      ->map(function ($storage) {
+                          return [
+                              'Hostname' => $storage->device->hostname ?? 'N/A',
+                              'sysName' => $storage->device->sysName ?? 'N/A',
+                              'Disk Name' => $storage->storage_descr ?? 'N/A', 
+                              'Disk Usage' => $storage->storage_used ?? 'N/A', 
+                          ];
+                      });
     }
 
-    public function headings(): array
-    {
+    public function headings(): array {
         return [
             'Hostname',
             'sysName',
-            'Port Name',
-            'Port Status',
+            'Disk Name',
+            'Disk Usage',
         ];
     }
 }
