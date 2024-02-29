@@ -45,7 +45,7 @@ public function exportDisks(Request $request)
 public function exportSpecificData(Request $request) 
 {
     $deviceIds = $request->input('device_id', []);
-    $dataType = $request->input('data_type'); 
+    $dataType = $request->input('data_type');
 
     $export = new SpecificExport($deviceIds, $dataType);
     return $export->download();

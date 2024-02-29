@@ -1,12 +1,12 @@
 <?php
 
 namespace mbakgor\ExportData\Exports;
+
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Concerns\Exportable;
 use ZipArchive;
-use Illuminate\Support\Collection;
-use mbakgor\ExportData\Exports\Models\PortDataExport;
-use mbakgor\ExportData\Exports\Models\DiskDataExport;
+use Illuminate\Support\Facades\Storage;
 
 class SpecificExport {
     use Exportable;
@@ -35,36 +35,26 @@ class SpecificExport {
     protected function downloadMultiple() {
         $zip = new ZipArchive;
         $zipFileName = 'exports_' . time() . '.zip';
+        $zipPath = storage_path('app/public/' . $zipFileName); 
 
-        $exportedZipPath = base_path('mbakgor/ExportData/Exports/ExportedZip/' . $zipFileName);
-
-        $tempExcelBasePath = base_path('mbakgor/ExportData/Exports/ExportedZip/temp_excel/');
-
-        if (!file_exists($tempExcelBasePath)) {
-            mkdir($tempExcelBasePath, 0755, true);
-        }
-    
-        if ($zip->open($exportedZipPath, ZipArchive::CREATE) === TRUE) {
+        if ($zip->open($zipPath, ZipArchive::CREATE) === TRUE) {
             foreach ($this->deviceIds as $deviceId) {
                 $exportClass = $this->getExportClass();
                 $fileName = $this->generateFileName($deviceId);
+                $tempExcelPath = 'public/' . $fileName; 
+
+                Excel::store(new $exportClass([$deviceId]), $tempExcelPath);
+
                 
-                
-                $tempExcelPath = $tempExcelBasePath . 'temp_' . $fileName;
-                \Maatwebsite\Excel\Facades\Excel::store(new $exportClass([$deviceId]), 'temp_excel/' . 'temp_' . $fileName);
-                
-                
-                if (file_exists($tempExcelPath)) {
-                    $zip->addFile($tempExcelPath, $fileName);
-                    
-                    
-                    unlink($tempExcelPath);
+                if (Storage::disk('public')->exists($fileName)) {
+                    $zip->addFile(storage_path('app/public/' . $fileName), $fileName);
+                    Storage::disk('public')->delete($fileName); 
                 }
             }
             $zip->close();
         }
-    
-        return response()->download($exportedZipPath)->deleteFileAfterSend(true);
+
+        return response()->download($zipPath)->deleteFileAfterSend(true);
     }
 
     protected function getExportClass() {
@@ -81,5 +71,4 @@ class SpecificExport {
     protected function generateFileName($deviceId) {
         return "{$this->dataType}_data_export_device_{$deviceId}_" . time() . ".xlsx";
     }
-
 }
