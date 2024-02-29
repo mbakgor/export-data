@@ -1,7 +1,7 @@
 <?php
 
 namespace mbakgor\ExportData\Exports;
-
+use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Concerns\Exportable;
 use ZipArchive;
 use Illuminate\Support\Collection;
@@ -29,25 +29,42 @@ class SpecificExport {
 
     protected function downloadSingle($deviceId) {
         $exportClass = $this->getExportClass();
-        return (new $exportClass([$deviceId]))->download($this->generateFileName($deviceId));
+        return Excel::download(new $exportClass([$deviceId]), $this->generateFileName($deviceId));
     }
 
     protected function downloadMultiple() {
         $zip = new ZipArchive;
         $zipFileName = 'exports_' . time() . '.zip';
-        $zipPath = storage_path('app/public/' . $zipFileName);
 
-        if ($zip->open($zipPath, ZipArchive::CREATE) === TRUE) {
+        $exportedZipPath = base_path('mbakgor/ExportData/Exports/ExportedZip/' . $zipFileName);
+
+        $tempExcelBasePath = base_path('mbakgor/ExportData/Exports/ExportedZip/temp_excel/');
+
+        if (!file_exists($tempExcelBasePath)) {
+            mkdir($tempExcelBasePath, 0755, true);
+        }
+    
+        if ($zip->open($exportedZipPath, ZipArchive::CREATE) === TRUE) {
             foreach ($this->deviceIds as $deviceId) {
                 $exportClass = $this->getExportClass();
                 $fileName = $this->generateFileName($deviceId);
-                $content = (new $exportClass([$deviceId]))->raw()->string();
-                $zip->addFromString($fileName, $content);
+                
+                
+                $tempExcelPath = $tempExcelBasePath . 'temp_' . $fileName;
+                \Maatwebsite\Excel\Facades\Excel::store(new $exportClass([$deviceId]), 'temp_excel/' . 'temp_' . $fileName);
+                
+                
+                if (file_exists($tempExcelPath)) {
+                    $zip->addFile($tempExcelPath, $fileName);
+                    
+                    
+                    unlink($tempExcelPath);
+                }
             }
             $zip->close();
         }
-
-        return response()->download($zipPath)->deleteFileAfterSend(true);
+    
+        return response()->download($exportedZipPath)->deleteFileAfterSend(true);
     }
 
     protected function getExportClass() {
