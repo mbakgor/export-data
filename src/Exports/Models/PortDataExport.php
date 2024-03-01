@@ -21,11 +21,15 @@ class PortDataExport implements FromCollection, WithHeadings {
         
 
         $data = $ports->map(function ($port) {
+            $portSpeed = $port->ifSpeed  / 1000000;
             return [
                 'Hostname' => $port->device->hostname ?? 'N/A',
-                'sysName' => $port->device->sysName ?? 'N/A',
+                'Device System Name' => $port->device->sysName ?? 'N/A',
                 'Port Name' => $port->getLabel(),
-                'Port Status' => $port->ifOperStatus ?? 'N/A',
+                'Port Type' => $port->ifType ?? 'N/A',
+                'Port Operation Status' => $port->ifOperStatus ?? 'N/A',
+                'Port Admin Status' => $port->ifAdminStatus ?? 'N/A',
+                'Port Speed' => $portSpeed ?? 'N/A',
             ];
         });
 
@@ -36,9 +40,12 @@ class PortDataExport implements FromCollection, WithHeadings {
     {
         return [
             'Hostname',
-            'sysName',
+            'Device System Name',
             'Port Name',
-            'Port Status',
+            'Port Type',
+            'Port Operation Status',
+            'Port Admin Status',
+            'Port Speed (MB)',
         ];
     }
 }

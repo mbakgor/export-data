@@ -19,11 +19,16 @@ class DiskDataExport implements FromCollection, WithHeadings {
                       ->with(['device'])
                       ->get()
                       ->map(function ($storage) {
+                          $storageUsed = number_format($storage->storage_used / (8 * (2 ** 30)), 2, '', '');
+                          $storageFree = number_format($storage->storage_free / (8 * (2 ** 30)), 2, '', '');
+                          $storageSize = number_format($storage->storage_size / (8 * (2 ** 30)), 2, '', '');
                           return [
                               'Hostname' => $storage->device->hostname ?? 'N/A',
                               'sysName' => $storage->device->sysName ?? 'N/A',
                               'Disk Name' => $storage->storage_descr ?? 'N/A', 
-                              'Disk Usage' => $storage->storage_used ?? 'N/A', 
+                              'Disk Size' => $storageSize ?? 'N/A',
+                              'Disk Usage' => $storageUsed ?? 'N/A',
+                              'Disk Free' => $storageFree ?? 'N/A',
                           ];
                       });
     }
@@ -33,7 +38,9 @@ class DiskDataExport implements FromCollection, WithHeadings {
             'Hostname',
             'sysName',
             'Disk Name',
-            'Disk Usage',
+            'Disk Size (GB)',
+            'Disk Usage (GB)',
+            'Disk Free (GB)',
         ];
     }
 }

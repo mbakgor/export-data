@@ -63,6 +63,10 @@ class SpecificExport {
                 return \mbakgor\ExportData\Exports\Models\PortDataExport::class;
             case 'disks':
                 return \mbakgor\ExportData\Exports\Models\DiskDataExport::class;
+            case 'memories':
+                return \mbakgor\ExportData\Exports\Models\MemoryDataExport::class;
+            case 'processors':
+                return \mbakgor\ExportData\Exports\Models\ProcessorDataExport::class;
             default:
                 throw new \Exception("Unsupported data type: " . $this->dataType);
         }

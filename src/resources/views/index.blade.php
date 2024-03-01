@@ -100,6 +100,8 @@
                                                        <select name="data_type" id="data_type" class="form-control">
                                                        <option value="ports">Port Data</option>
                                                        <option value="disks">Disk Data</option>
+                                                       <option value="memories">Memory Data</option>
+                                                       <option value="processors">Processor Data</option>
                                                          </select>
                                                 </div>
                                                 <button type="submit" class="btn btn-primary">Export Data</button>
