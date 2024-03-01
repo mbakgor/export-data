@@ -20,7 +20,7 @@ class DiskDataExport implements FromCollection, WithHeadings, WithTitle {
     }
 
     public function collection() {
-        return Storage::whereIn('device_id', $this->deviceIds)
+        return Storage::whereIn('device_id', $this->deviceId)
                       ->with(['device'])
                       ->get()
                       ->map(function ($storage) {
