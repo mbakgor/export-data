@@ -11,7 +11,7 @@ class DiskDataExport implements FromCollection, WithHeadings {
     protected $deviceIds;
 
     public function __construct(array $deviceIds) {
-        $this->deviceIds = $deviceIds;
+        $this->deviceId = is_array($deviceId) ? $deviceId : [$deviceId];
     }
 
     public function collection() {
@@ -19,9 +19,9 @@ class DiskDataExport implements FromCollection, WithHeadings {
                       ->with(['device'])
                       ->get()
                       ->map(function ($storage) {
-                          $storageUsed = number_format($storage->storage_used / (8 * (2 ** 30)), 2, '', '');
-                          $storageFree = number_format($storage->storage_free / (8 * (2 ** 30)), 2, '', '');
-                          $storageSize = number_format($storage->storage_size / (8 * (2 ** 30)), 2, '', '');
+                          $storageUsed = number_format($storage->storage_used / (8 * (2 ** 30)), 2, ',', '');
+                          $storageFree = number_format($storage->storage_free / (8 * (2 ** 30)), 2, ',', '');
+                          $storageSize = number_format($storage->storage_size / (8 * (2 ** 30)), 2, ',', '');
                           return [
                               'Hostname' => $storage->device->hostname ?? 'N/A',
                               'sysName' => $storage->device->sysName ?? 'N/A',

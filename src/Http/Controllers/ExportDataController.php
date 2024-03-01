@@ -48,7 +48,8 @@ public function exportSpecificData(Request $request)
     $dataType = $request->input('data_type');
 
     $export = new SpecificExport($deviceIds, $dataType);
-    return $export->download();
+    return $export->downloadExcel();
+
 }
 
 

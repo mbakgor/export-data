@@ -10,7 +10,7 @@ class PortDataExport implements FromCollection, WithHeadings {
     protected $deviceId;
 
     public function __construct($deviceId) {
-        $this->deviceId = $deviceId;
+        $this->deviceId = is_array($deviceId) ? $deviceId : [$deviceId];
     }
 
     public function collection() {

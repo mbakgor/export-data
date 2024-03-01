@@ -10,7 +10,7 @@ class MemoryDataExport implements FromCollection, WithHeadings {
     protected $deviceId;
 
     public function __construct($deviceId) {
-        $this->deviceId = $deviceId;
+        $this->deviceId = is_array($deviceId) ? $deviceId : [$deviceId];
     }
 
     public function collection() {
@@ -21,9 +21,9 @@ class MemoryDataExport implements FromCollection, WithHeadings {
 
         
         $data = $mempools->map(function ($mempool) {
-            $memoryTotal = number_format($mempool->mempool_total / (1024 ** 3), '4', '');
-            $memoryUsed = number_Format($mempool->mempool_used / (1024 ** 3), '4', '');
-            $memoryFree = number_Format($mempool->mempool_free / (1024 ** 3), '4', '');
+            $memoryTotal = number_format($mempool->mempool_total / (1024 ** 3), '4', ',', '');
+            $memoryUsed = number_Format($mempool->mempool_used / (1024 ** 3), '4', ',', '');
+            $memoryFree = number_Format($mempool->mempool_free / (1024 ** 3), '4', ',', '');
             return [
                 'Hostname' => $mempool->device->hostname ?? 'N/A',
                 'Device System Name' => $mempool->device->sysName ?? 'N/A',

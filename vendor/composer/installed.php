@@ -3,7 +3,7 @@
         'name' => 'mbakgor/export-data',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'c7c2507bf15d846d1c874563ab2ff7310f2a9cc0',
+        'reference' => 'ca200ed6bd488b017c41c37114383232f434e8a0',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -134,7 +134,7 @@
         'mbakgor/export-data' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'c7c2507bf15d846d1c874563ab2ff7310f2a9cc0',
+            'reference' => 'ca200ed6bd488b017c41c37114383232f434e8a0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

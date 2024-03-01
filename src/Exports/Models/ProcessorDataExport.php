@@ -11,7 +11,7 @@ class ProcessorDataExport implements FromCollection, WithHeadings {
     protected $deviceId;
 
     public function __construct($deviceId) {
-        $this->deviceId = $deviceId;
+        $this->deviceId = is_array($deviceId) ? $deviceId : [$deviceId];
     }
 
     public function collection() {
@@ -34,7 +34,7 @@ class ProcessorDataExport implements FromCollection, WithHeadings {
         return $data;
     }
 
-    public function heading(): array {
+    public function headings(): array {
         return [
             'Hostname',
             'Device System Name',

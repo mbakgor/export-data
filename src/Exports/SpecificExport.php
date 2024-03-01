@@ -2,13 +2,12 @@
 
 namespace mbakgor\ExportData\Exports;
 
-use Illuminate\Support\Str;
+use App\Models\Device;
 use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use Maatwebsite\Excel\Concerns\Exportable;
-use ZipArchive;
-use Illuminate\Support\Facades\Storage;
 
-class SpecificExport {
+class SpecificExport implements WithMultipleSheets {
     use Exportable;
 
     protected $deviceIds;
@@ -19,42 +18,20 @@ class SpecificExport {
         $this->dataType = $dataType;
     }
 
-    public function download() {
-        if (count($this->deviceIds) > 1) {
-            return $this->downloadMultiple();
-        } else {
-            return $this->downloadSingle(current($this->deviceIds));
-        }
+    
+    public function downloadExcel() {
+        $fileName = $this->generateFileName();
+        return Excel::download($this, $fileName);
     }
 
-    protected function downloadSingle($deviceId) {
-        $exportClass = $this->getExportClass();
-        return Excel::download(new $exportClass([$deviceId]), $this->generateFileName($deviceId));
-    }
-
-    protected function downloadMultiple() {
-        $zip = new ZipArchive;
-        $zipFileName = 'exports_' . time() . '.zip';
-        $zipPath = storage_path('app/public/' . $zipFileName); 
-
-        if ($zip->open($zipPath, ZipArchive::CREATE) === TRUE) {
-            foreach ($this->deviceIds as $deviceId) {
-                $exportClass = $this->getExportClass();
-                $fileName = $this->generateFileName($deviceId);
-                $tempExcelPath = 'public/' . $fileName; 
-
-                Excel::store(new $exportClass([$deviceId]), $tempExcelPath);
-
-                
-                if (Storage::disk('public')->exists($fileName)) {
-                    $zip->addFile(storage_path('app/public/' . $fileName), $fileName);
-                    Storage::disk('public')->delete($fileName); 
-                }
-            }
-            $zip->close();
+    
+    public function sheets(): array {
+        $sheets = [];
+        foreach ($this->deviceIds as $deviceId) {
+            $exportClass = $this->getExportClass();
+            $sheets[] = new $exportClass($deviceId);
         }
-
-        return response()->download($zipPath)->deleteFileAfterSend(true);
+        return $sheets;
     }
 
     protected function getExportClass() {
@@ -63,16 +40,17 @@ class SpecificExport {
                 return \mbakgor\ExportData\Exports\Models\PortDataExport::class;
             case 'disks':
                 return \mbakgor\ExportData\Exports\Models\DiskDataExport::class;
-            case 'memories':
-                return \mbakgor\ExportData\Exports\Models\MemoryDataExport::class;
-            case 'processors':
-                return \mbakgor\ExportData\Exports\Models\ProcessorDataExport::class;
+            
             default:
                 throw new \Exception("Unsupported data type: " . $this->dataType);
         }
     }
 
-    protected function generateFileName($deviceId) {
-        return "{$this->dataType}_data_export_device_{$deviceId}_" . time() . ".xlsx";
+    
+    protected function generateFileName() {
+        $device = Device::find($deviceId);
+        $deviceName = $device ? $device->hostname : 'unknown_device';
+
+        return "{$this->dataType}_data_device_{$deviceName}.xlsx";
     }
 }
