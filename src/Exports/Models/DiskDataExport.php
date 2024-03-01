@@ -1,17 +1,22 @@
 <?php
 
 namespace mbakgor\ExportData\Exports\Models;
-
+use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use App\Models\Storage; 
 use App\Models\Device;
 
-class DiskDataExport implements FromCollection, WithHeadings {
-    protected $deviceIds;
+class DiskDataExport implements FromCollection, WithHeadings, WithTitle {
+    protected $deviceId;
 
-    public function __construct(array $deviceIds) {
+    private $deviceName;
+
+    public function __construct($deviceId) {
         $this->deviceId = is_array($deviceId) ? $deviceId : [$deviceId];
+
+        $device = Device::find($this->deviceId[0]);
+        $this->deviceName = $device ? $device->hostname : 'Unknown Device';
     }
 
     public function collection() {
@@ -42,5 +47,9 @@ class DiskDataExport implements FromCollection, WithHeadings {
             'Disk Usage (GB)',
             'Disk Free (GB)',
         ];
+    }
+
+    public function title(): string {
+        return $this->deviceName;
     }
 }

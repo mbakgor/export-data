@@ -1,16 +1,22 @@
 <?php
 
 namespace mbakgor\ExportData\Exports\Models;
-
+use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use App\Models\Mempool;
+use App\Models\Device;
 
-class MemoryDataExport implements FromCollection, WithHeadings {
+class MemoryDataExport implements FromCollection, WithHeadings, WithTitle {
     protected $deviceId;
+
+    private $deviceName;
 
     public function __construct($deviceId) {
         $this->deviceId = is_array($deviceId) ? $deviceId : [$deviceId];
+
+        $device = Device::find($this->deviceId[0]);
+        $this->deviceName = $device ? $device->hostname : 'Unknown Device';
     }
 
     public function collection() {
@@ -49,5 +55,10 @@ class MemoryDataExport implements FromCollection, WithHeadings {
             'Memory Used (GB)',
             'Memory Free (GB)',
         ];
+        
+    }
+
+    public function title(): string {
+        return $this->deviceName;
     }
 }

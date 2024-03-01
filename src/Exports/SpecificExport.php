@@ -40,6 +40,10 @@ class SpecificExport implements WithMultipleSheets {
                 return \mbakgor\ExportData\Exports\Models\PortDataExport::class;
             case 'disks':
                 return \mbakgor\ExportData\Exports\Models\DiskDataExport::class;
+            case 'memories':
+                 return \mbakgor\ExportData\Exports\Models\MemoryDataExport::class;
+            case 'processors':
+                 return \mbakgor\ExportData\Exports\Models\ProcessorDataExport::class;
             
             default:
                 throw new \Exception("Unsupported data type: " . $this->dataType);
@@ -48,9 +52,15 @@ class SpecificExport implements WithMultipleSheets {
 
     
     protected function generateFileName() {
-        $device = Device::find($deviceId);
-        $deviceName = $device ? $device->hostname : 'unknown_device';
-
-        return "{$this->dataType}_data_device_{$deviceName}.xlsx";
+        
+        if (count($this->deviceIds) > 1) {
+            return "{$this->dataType}_data_export_" . date('Y-m-d_His') . ".xlsx";
+        } else {
+           
+            $deviceId = current($this->deviceIds); 
+            $device = Device::find($deviceId);
+            $deviceName = $device ? $device->hostname : 'unknown_device';
+            return "{$this->dataType}_data_{$deviceName}_" . date('Y-m-d_His') . ".xlsx";
+        }
     }
 }

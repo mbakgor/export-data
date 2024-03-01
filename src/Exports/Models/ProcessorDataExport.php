@@ -1,17 +1,23 @@
 <?php
 
 namespace mbakgor\ExportData\Exports\Models;
-
+use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use App\Models\Processor;
+use App\Models\Device;
 
-class ProcessorDataExport implements FromCollection, WithHeadings {
+class ProcessorDataExport implements FromCollection, WithHeadings, WithTitle {
 
     protected $deviceId;
 
+    private $deviceName;
+
     public function __construct($deviceId) {
         $this->deviceId = is_array($deviceId) ? $deviceId : [$deviceId];
+
+        $device = Device::find($this->deviceId[0]);
+        $this->deviceName = $device ? $device->hostname : 'Unknown Device';
     }
 
     public function collection() {
@@ -42,6 +48,10 @@ class ProcessorDataExport implements FromCollection, WithHeadings {
             'Processor Type',
             'Processor Usage (%)'
         ];
+    }
+
+    public function title(): string {
+        return $this->deviceName;
     }
 
 }

@@ -1,16 +1,22 @@
 <?php
 
 namespace mbakgor\ExportData\Exports\Models;
-
+use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use App\Models\Port;
+use App\Models\Device;
 
-class PortDataExport implements FromCollection, WithHeadings {
+class PortDataExport implements FromCollection, WithHeadings, WithTitle {
     protected $deviceId;
+
+    private $deviceName;
 
     public function __construct($deviceId) {
         $this->deviceId = is_array($deviceId) ? $deviceId : [$deviceId];
+
+        $device = Device::find($this->deviceId[0]);
+        $this->deviceName = $device ? $device->hostname : 'Unknown Device';
     }
 
     public function collection() {
@@ -47,5 +53,9 @@ class PortDataExport implements FromCollection, WithHeadings {
             'Port Admin Status',
             'Port Speed (MB)',
         ];
+    }
+
+    public function title(): string {
+        return $this->deviceName;
     }
 }
