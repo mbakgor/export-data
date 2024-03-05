@@ -1,6 +1,6 @@
 # export-data
 
-#Installiation
+# Installiation
 
 You need to follow this commands in where librenms located with librenms user.
 
