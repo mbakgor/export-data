@@ -2,6 +2,7 @@
 
 namespace mbakgor\ExportData\Http\Controllers;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Request as FacadesRequest;
 use mbakgor\ExportData\Exports\DevicesExport;
 use mbakgor\ExportData\Exports\DisksExport;
 use mbakgor\ExportData\Exports\SpecificExport;
+use mbakgor\ExportData\Exports\FailedBackupsExport;
+
 
 class ExportDataController extends Controller
 {
@@ -52,6 +55,45 @@ public function exportSpecificData(Request $request)
 
 }
 
+
+public function exportFailedBackups(Request $request)
+{
+
+    $hostname = $request->getHttpHost();
+    $ipRecords = dns_get_record($hostname, DNS_A);
+
+    if (!empty($ipRecords)) {
+         $ip = $ipRecords[0]['ip'];
+         $nodesJsonUrl = "http://$ip:8888/nodes.json";
+
+
+            $response = Http::get($nodesJsonUrl);
+
+            if ($response->successful()) {
+             $data = $response->json();
+              $backupData = [];
+
+             foreach ($data as $node) {
+              $lastBackup = $node['last'] ?? null;
+
+                if ($lastBackup && $lastBackup['status'] !== 'success') {
+                $backupData[] = [
+                    'Hostname' => $node['name'],
+                    'Last Backup Status' => $lastBackup['status'],
+                    'Last Backup Time' => $lastBackup['time'],
+                    'Type' => $node['group'] ?? 'N/A',
+                    'Error Message' => $lastBackup['message'] ?? 'No error details available',
+                ];
+            }
+        }
+
+
+        return Excel::download(new FailedBackupsExport($backupData), 'failed_backups.xlsx');
+    }
+} else {
+    return back()->withError('Failed to fetch backup data.');
+}
+}
 
 
     

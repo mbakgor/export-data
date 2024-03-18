@@ -316,12 +316,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "dd0c652dfac0901c17bcfac94fe792e615b56e12"
+                "reference": "36651526fa6bb5445ffc6d51899d80291f8e0486"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/dd0c652dfac0901c17bcfac94fe792e615b56e12",
-                "reference": "dd0c652dfac0901c17bcfac94fe792e615b56e12",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/36651526fa6bb5445ffc6d51899d80291f8e0486",
+                "reference": "36651526fa6bb5445ffc6d51899d80291f8e0486",
                 "shasum": ""
             },
             "require": {
@@ -363,7 +363,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-02-21T14:18:14+00:00"
+            "time": "2024-03-10T15:34:39+00:00"
         },
         {
             "name": "illuminate/conditionable",
@@ -511,12 +511,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "96d4512df39bee8cb60d50783f944a48242ea862"
+                "reference": "980d80017e859c8b1720892d952516e8c0b6708f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/96d4512df39bee8cb60d50783f944a48242ea862",
-                "reference": "96d4512df39bee8cb60d50783f944a48242ea862",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/980d80017e859c8b1720892d952516e8c0b6708f",
+                "reference": "980d80017e859c8b1720892d952516e8c0b6708f",
                 "shasum": ""
             },
             "require": {
@@ -574,7 +574,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-02-26T22:20:06+00:00"
+            "time": "2024-03-11T21:46:45+00:00"
         },
         {
             "name": "maatwebsite/excel",
@@ -1451,12 +1451,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "9773676c8a1bb1f8d4340a62efe641cf76eda7ec"
+                "reference": "e5e7ddb00b859dbdf5ad8f3bbe4cd29a3a37aa34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/9773676c8a1bb1f8d4340a62efe641cf76eda7ec",
-                "reference": "9773676c8a1bb1f8d4340a62efe641cf76eda7ec",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/e5e7ddb00b859dbdf5ad8f3bbe4cd29a3a37aa34",
+                "reference": "e5e7ddb00b859dbdf5ad8f3bbe4cd29a3a37aa34",
                 "shasum": ""
             },
             "require": {
@@ -1508,7 +1508,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.29.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/1.x"
             },
             "funding": [
                 {
@@ -1524,7 +1524,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-29T20:11:03+00:00"
+            "time": "2024-03-14T13:49:05+00:00"
         },
         {
             "name": "symfony/polyfill-php80",

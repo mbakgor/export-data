@@ -3,7 +3,7 @@
         'name' => 'mbakgor/export-data',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'c560f783a3640a5356ff189abdf808c62c62076b',
+        'reference' => '3847a88574f6ecf0a84df3861baf498447ebbb2f',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -53,7 +53,7 @@
         'illuminate/collections' => array(
             'pretty_version' => '10.x-dev',
             'version' => '10.9999999.9999999.9999999-dev',
-            'reference' => 'dd0c652dfac0901c17bcfac94fe792e615b56e12',
+            'reference' => '36651526fa6bb5445ffc6d51899d80291f8e0486',
             'type' => 'library',
             'install_path' => __DIR__ . '/../illuminate/collections',
             'aliases' => array(),
@@ -89,7 +89,7 @@
         'illuminate/support' => array(
             'pretty_version' => '10.x-dev',
             'version' => '10.9999999.9999999.9999999-dev',
-            'reference' => '96d4512df39bee8cb60d50783f944a48242ea862',
+            'reference' => '980d80017e859c8b1720892d952516e8c0b6708f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../illuminate/support',
             'aliases' => array(),
@@ -134,7 +134,7 @@
         'mbakgor/export-data' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'c560f783a3640a5356ff189abdf808c62c62076b',
+            'reference' => '3847a88574f6ecf0a84df3861baf498447ebbb2f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -242,7 +242,7 @@
         'symfony/polyfill-mbstring' => array(
             'pretty_version' => '1.x-dev',
             'version' => '1.9999999.9999999.9999999-dev',
-            'reference' => '9773676c8a1bb1f8d4340a62efe641cf76eda7ec',
+            'reference' => 'e5e7ddb00b859dbdf5ad8f3bbe4cd29a3a37aa34',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-mbstring',
             'aliases' => array(),

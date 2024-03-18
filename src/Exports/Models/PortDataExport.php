@@ -36,6 +36,8 @@ class PortDataExport implements FromCollection, WithHeadings, WithTitle {
                 'Port Operation Status' => $port->ifOperStatus ?? 'N/A',
                 'Port Admin Status' => $port->ifAdminStatus ?? 'N/A',
                 'Port Speed' => $portSpeed ?? 'N/A',
+                'RX Error Rate' => $port->ifInErrors ?? 'N/A',
+                'TX Error Rate' => $port->ifOutErrors ?? 'N/A'
             ];
         });
 
@@ -52,6 +54,8 @@ class PortDataExport implements FromCollection, WithHeadings, WithTitle {
             'Port Operation Status',
             'Port Admin Status',
             'Port Speed (MB)',
+            'RX Error Rate',
+            'TX Error Rate'
         ];
     }
 

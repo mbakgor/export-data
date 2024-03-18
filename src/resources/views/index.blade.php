@@ -17,6 +17,7 @@
                             <li class="active"><a href="/plugins/export-data#devices" data-toggle="tab" aria-expanded="true">Export General Data</a></li>
                             <li><a href="/plugins/export-data#disks" data-toggle="tab">Export Disk Data</a></li>
                             <li><a href="/plugins/export-data#specific" data-toggle="tab">Export Specific Data</a></li>
+                            <li><a href="/plugins/export-data#backups" data-toggle="tab">Export Failed Oxidized Backups</a></li>
                         </ul>
                     </div>
                     <div class="panel with-nav-tabs panel-default">
@@ -105,6 +106,26 @@
                                                          </select>
                                                 </div>
                                                 <button type="submit" class="btn btn-primary">Export Data</button>
+                                                </form>
+                                                </div>
+                                             </div>
+                                         </div>
+                                    </div>
+                                </div>
+                                <!-- end -->
+                                 <!-- start -->
+                                 <div id="backups" class="tab-pane fade">
+                                    <div class="row" style="height: 100%;">
+                                        <div class="col-md-4">
+                                            <div class="panel panel-default">
+                                              <div class="panel-heading">
+                                                   <h3 class="panel-title">Export Failed Oxidized Backups</h3>
+                                              </div>
+                                              <div class="panel-body text-center" style="height: 55vh;">
+                                              <form action="{{ route('export-data.exportFailedBackups') }}" method="POST">
+                                                 @csrf
+
+                                                <button type="submit" class="btn btn-primary">Export Failed Backups</button>
                                                 </form>
                                                 </div>
                                              </div>
