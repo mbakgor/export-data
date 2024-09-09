@@ -1,4 +1,5 @@
 # export-data
+This plugin helps to export important data from librenms.
 
 # Installiation
 
